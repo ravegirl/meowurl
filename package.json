@@ -1,0 +1,89 @@
+{
+  "publisher": "local",
+  "name": "meowurl",
+  "displayName": "meowurl",
+  "description": "Personal API client for VS Code",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "meowurl.open",
+        "title": "meowurl: Open"
+      },
+      {
+        "command": "meowurl.openPanel",
+        "title": "meowurl: Open Panel"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "meowurl-sidebar",
+          "title": "meowurl",
+          "icon": "media/icon.svg"
+        }
+      ],
+      "panel": [
+        {
+          "id": "meowurl-panel",
+          "title": "meowurl",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "meowurl-sidebar": [
+        {
+          "id": "meowurl.endpointTree",
+          "name": "Endpoints"
+        }
+      ],
+      "meowurl-panel": [
+        {
+          "id": "meowurl.panelView",
+          "name": "meowurl",
+          "type": "webview"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "meowurl.open",
+          "when": "view == meowurl.endpointTree",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build:ext && npm run build:webview",
+    "build:ext": "node build-ext.mjs",
+    "build:webview": "vite build",
+    "dev:webview": "vite build --watch",
+    "watch:ext": "tsc -p tsconfig.extension.json --watch",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
+    "esbuild": "^0.28.0",
+    "svelte": "^5.0.0",
+    "typescript": "^5.3.0",
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "@apidevtools/swagger-parser": "^12.1.0",
+    "@types/js-yaml": "^4.0.9",
+    "js-yaml": "^4.1.0"
+  }
+}

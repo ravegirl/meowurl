@@ -1,0 +1,7 @@
+**/.git/**
+**/node_modules/**
+src/**
+vite.config.mts
+svelte.config.mjs
+tsconfig*.json
+.vscodeignore
